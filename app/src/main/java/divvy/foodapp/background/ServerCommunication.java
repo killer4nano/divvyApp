@@ -47,4 +47,60 @@ public class ServerCommunication {
         }
 
     }
+
+    public static boolean register(String username, String password) throws Exception{
+        try {
+            URL url = new URL("http://"+serverIp+":8080/register/"+username+"/"+password);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            int responseCode = conn.getResponseCode();
+            if(responseCode != 200) {
+                Log.e("TEST","CODE: "+responseCode);
+            }
+
+            Scanner sc = new Scanner(conn.getInputStream());
+            String inLine = "";
+            while(sc.hasNext()) {
+                inLine += sc.nextLine();
+            }
+            if(!inLine.contains("0")) {
+                return true;
+            }else {
+                return false;
+            }
+        }catch(Exception e) {
+            Log.e("TEST",Log.getStackTraceString(e));
+            return false;
+        }
+
+    }
+
+    public static boolean checkUser(String username) throws Exception{
+        try {
+            URL url = new URL("http://"+serverIp+":8080/checkuser/"+username);
+            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            int responseCode = conn.getResponseCode();
+            if(responseCode != 200) {
+                Log.e("TEST","CODE: "+responseCode);
+            }
+
+            Scanner sc = new Scanner(conn.getInputStream());
+            String inLine = "";
+            while(sc.hasNext()) {
+                inLine += sc.nextLine();
+            }
+            if(inLine.contains("0")) {
+                return false;
+            }else {
+                return true;
+            }
+        }catch(Exception e) {
+            Log.e("TEST",Log.getStackTraceString(e));
+            return false;
+        }
+
+    }
 }
