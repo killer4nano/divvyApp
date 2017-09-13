@@ -1,5 +1,6 @@
 package divvy.foodapp;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +17,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void cook(View v) {
-        showMessage("This feature hasn't been added yet!");
+        startActivity(new Intent(HomeScreen.this, CookDash.class));
     }
 
 
