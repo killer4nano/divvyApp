@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 
 public class ServerCommunication {
-    private static String serverIp = "10.117.80.139";
+    private static String serverIp = "172.245.168.108";
 
 
 

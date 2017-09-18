@@ -1,7 +1,10 @@
 package divvy.foodapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class CreateDish extends AppCompatActivity {
@@ -22,6 +26,7 @@ public class CreateDish extends AppCompatActivity {
     private ArrayList<String> ingredients = new ArrayList();
     private CreateDish act;
     ListView ingredientsList;
+    private static final int IMAGE_GALLERY_REQUEST = 220;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +42,7 @@ public class CreateDish extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
 
                 TextView textView = (TextView) view.findViewById(android.R.id.text1);
-                view.setBackgroundColor(Color.parseColor("#000000"));
+                //view.setBackgroundColor(Color.parseColor("#000000"));
                 textView.setTextColor(Color.parseColor("#FFFFFF"));
 
                 return view;
@@ -81,6 +86,23 @@ public class CreateDish extends AppCompatActivity {
         });
     }
 
+    public void cameraImg(View v) {
+
+    }
+
+    @Override
+    public int checkCallingOrSelfUriPermission(Uri uri, int modeFlags) {
+        return super.checkCallingOrSelfUriPermission(uri, modeFlags);
+    }
+
+    public void galleryImg(View v) {
+        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        String pictureDirectoryPath = pictureDirectory.getPath();
+        Uri data = Uri.parse(pictureDirectoryPath);
+        photoPickerIntent.setDataAndType(data,"image/*");
+        startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST);
+    }
 
 
     public void addIng(View v) {

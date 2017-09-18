@@ -16,17 +16,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginScreen">
+        <activity android:name=".LoginScreen" android:windowSoftInputMode="adjustNothing"> >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
         <activity android:name=".Registration" />
-        <activity android:name=".HomeScreen" />
-        <activity android:name=".CookDash" />
-        <activity android:name=".CreateDish"></activity>
+
+        <activity android:name=".HomeScreen" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".CookDash" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".CreateDish" android:windowSoftInputMode="adjustNothing"></activity>
     </application>
 
 </manifest>
